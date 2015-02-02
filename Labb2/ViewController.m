@@ -7,21 +7,29 @@
 //
 
 #import "ViewController.h"
+#import "ITHSSaga.h"
 
 @interface ViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextView *sagaText;
+@property (weak, nonatomic) IBOutlet UISwitch *romanceOption;
+@property (weak, nonatomic) IBOutlet UISwitch *violenceOption;
+@property (weak, nonatomic) IBOutlet UISlider *happinessOption;
+@property (nonatomic) ITHSSaga *saga;
+
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+- (IBAction)pushedButton:(id)sender {
+    self.sagaText.text = [self.saga generateWithRomance:self.romanceOption.isOn WithViolence:self.violenceOption.isOn WithHappiness:self.happinessOption.value];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.saga = [[ITHSSaga alloc] init];
 }
 
 @end
